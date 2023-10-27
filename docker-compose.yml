@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+  app:
+    image: kopia/kopia:0.15
+    hostname: kopia
+    user: "0:0"
+    network_mode: "host"
+    restart: unless-stopped
+    command:
+      - server
+      - start
+      - --disable-csrf-token-checks
+      - --insecure
+      - --address=0.0.0.0:51515
+    environment:
+      TZ: Europe/Berlin
+    volumes:
+      - config:/app/config
+      - cache:/app/cache
+      - logs:/app/logs
+      - rclone:/app/rclone
+      # Mount path for browsing mounted snaphots
+      - /mnt/kopia:/tmp:shared
+    dns:
+      - 8.8.8.8
+
+volumes:
+  config:
+  cache:
+  logs:
+  rclone:
