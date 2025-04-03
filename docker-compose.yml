@@ -1,7 +1,7 @@
 services:
 
   app:
-    image: kopia/kopia:0.18
+    image: kopia/kopia:0.19
     hostname: kopia
     user: "0:0"
     network_mode: "host"
